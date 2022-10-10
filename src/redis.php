@@ -2,12 +2,6 @@
 /**
  * Redis
  * @category  Database Access 
- * @author    tim3k<timekoot@gmail.com>
- * @author    whoever contributes gets added as an author
- * @copyright Copyright (c) 2020-21, In memory of Gavin Belson.
- * @version   1.0.1
- * @started   6th-September-2020
- * @updated   7th-october-2020
  */
 
 class hooli{
