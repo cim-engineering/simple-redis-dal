@@ -3,7 +3,7 @@
     "description": "Simple Redis Abstraction",
     "autoload": {
         "psr-0": {
-            "NS_": "src/"
+            "files": ["src/redis.php"]
         }
     },
     "require-dev": {
