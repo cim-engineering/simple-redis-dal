@@ -1,10 +1,9 @@
 {
     "name": "tsk/simple-redis-dal",
     "description": "Simple Redis Abstraction",
+    "license" : "MIT",
     "autoload": {
-        "psr-0": {
             "files": ["src/redis.php"]
-        }
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
