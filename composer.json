@@ -1,5 +1,5 @@
 {
-    "name": "vendor/simple-redis-dal",
+    "name": "tsk/simple-redis-dal",
     "description": "Simple Redis Abstraction",
     "autoload": {
         "psr-0": {
