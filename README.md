@@ -1,3 +1,3 @@
 # README #
 
-Internal cim redis and memcache DAL
+Simple Redis Abstraction Layer
