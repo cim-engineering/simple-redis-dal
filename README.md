@@ -32,7 +32,7 @@ $data = [
     "location" => "USA, New York"
 ];
 $list = "users";
-$userID = "mary123"
+$userID = "mary123";
 $db->inserthashlist($userID, $data, $list);
 ```
 
