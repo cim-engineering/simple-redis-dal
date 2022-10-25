@@ -15,9 +15,45 @@ Simple initialization
 ```php
 $db = new hooli("127.0.0.0", "password");
 ```
+### Dealing with Hashes
+Create a hash / Store data into a hash (record types structured as collections of field-value pairs)
+```php
+$data = [
+    "firstName" => "Mary",
+    "lastName" => "Poppins",
+    "email" => "marypoppins@email.com",
+    "location" => "USA, New York"
+];
+$HashName = 'marypoppins@email.com';
+$db->createhash($HashName, $data);
+```
+Check if a value exists in a hash
+```php
+$HashName = 'marypoppins@email.com';
+$db->checkhash($HashName, "firstName");
+```
+
+Update / replace a single value in a hash
+```php
+$HashName = 'marypoppins@email.com';
+$db->replacehash($HashName, "location", "Nigeria, Lagos");
+```
+
+Insert new value into hash
+```php
+$HashName = 'marypoppins@email.com';
+$db->inserthash($HashName, "age", 32);
+```
+
+Fetch all values in a single hash
+```php
+$HashName = 'marypoppins@email.com';
+$db->gethash($HashName);
+```
+
 
 ### Dealing with lists
-insert value into a list
+Insert value into a list
 ```php
 $List = "users";
 $db->insertlist($List, "something@email.com");
