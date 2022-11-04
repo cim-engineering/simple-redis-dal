@@ -10,9 +10,10 @@ class hooli{
      * By default redis runs on port 6379
      * Setting additional useful constants
      */
-    const PORT = 6379;
+    // const PORT = 6379;
     const HANDLER = 'redis';
     protected $redis; 
+    private $port;
 
     /**
      * @param string host           most likely IP of the redis server
@@ -23,7 +24,8 @@ class hooli{
      * Also calls the internal connect method
      */
     function __construct($host = null, $password = null, $port = null){
-        $this->connect($host, $password, $port);
+        $this->port = $port;
+        $this->connect($host, $password, $this->port);
     }
 
     /**
@@ -36,7 +38,7 @@ class hooli{
     public function connect($host = null, $password = null, $port = null)
     {
         $this->redis = new Redis();
-        $this->redis->connect($host, self::PORT);  
+        $this->redis->connect($host, $port);  
         $this->redis->auth($password); 
      
     } 
@@ -59,7 +61,7 @@ class hooli{
      */
     public function set_session($host){
         ini_set('session.save_handler', self::HANDLER);
-        ini_set('session.save_path', 'tcp://'.$host.':'.self::PORT);  
+        ini_set('session.save_path', 'tcp://'.$host.':'.$this->port);  
     }
 
     /**
