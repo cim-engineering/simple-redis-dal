@@ -15,6 +15,12 @@ Simple initialization
 ```php
 $db = new hooli("127.0.0.0", "password");
 ```
+
+### Check if eveything works
+Simple check
+```php
+$db->ping();
+```
 ### Dealing with Hashes
 Create a hash / Store data into a hash (record types structured as collections of field-value pairs)
 ```php
