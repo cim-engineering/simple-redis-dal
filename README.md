@@ -21,6 +21,17 @@ Simple check
 ```php
 $db->ping();
 ```
+
+### Dealing with simple values
+Set a value
+```php
+$key = "username";
+$db->setvalue($key, "MaryPoppins");
+```
+Get the value
+```php 
+$username = $db->getvalue($key);
+```
 ### Dealing with Hashes
 Create a hash / Store data into a hash (record types structured as collections of field-value pairs)
 ```php
