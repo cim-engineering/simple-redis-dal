@@ -34,6 +34,12 @@ Get the value
 $username = $db->getvalue($key);
 ```
 
+Delete a value
+```php
+$key = "username";
+$db->delete($key);
+```
+
 Cache a value
 ```php 
 $key = "session_id";
@@ -50,7 +56,6 @@ $time = 1 // Time in minutes
 
 $db->expire($key, $time);
 ```
-
 
 ### Dealing with Hashes
 Create a hash / Store data into a hash (record types structured as collections of field-value pairs)
