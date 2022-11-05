@@ -135,7 +135,7 @@ class hooli{
      * 
      * @return void
      */
-    private function expire($key, $minutes){
+    public function expire($key, $minutes){
         $seconds = $minutes * 60; 
         $this->redis->expire($key, $seconds);
     }
