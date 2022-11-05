@@ -22,16 +22,41 @@ Simple check
 $db->ping();
 ```
 
-### Dealing with simple values
+### Handling simple values
 Set a value
 ```php
 $key = "username";
 $db->setvalue($key, "MaryPoppins");
 ```
+
 Get the value
 ```php 
 $username = $db->getvalue($key);
 ```
+
+Delete a value
+```php
+$key = "username";
+$db->delete($key);
+```
+
+Cache a value
+```php 
+$key = "session_id";
+$value = "12345";
+$time = 20 // Time is in minutes
+
+$db->cachevalue($key, $value, $time);
+```
+
+Expire a value
+```php 
+$key = "session_id";
+$time = 1 // Time in minutes
+
+$db->expire($key, $time);
+```
+
 ### Dealing with Hashes
 Create a hash / Store data into a hash (record types structured as collections of field-value pairs)
 ```php
