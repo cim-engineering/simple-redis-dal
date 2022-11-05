@@ -140,6 +140,13 @@ Return all values in a List as JSON
 $List = "users";
 $db->getlistjson($List);
 ```
+Get a specific number of elements from a list
+```php 
+$List = "users";
+$num = 10;
+$users = $db->getlistnum($List, $num); // Returns an array
+```
+
 
 ### Dealing with HashLists
 Save hashes to list (HashList) while mapping each value in list to key in hash

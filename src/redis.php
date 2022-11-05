@@ -393,11 +393,6 @@ class hooli{
         return json_encode($data, TRUE | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
- /*
-    * fetching specified number of list
-    * $num reperesents the number of list to fetch
-    */
-
     /*
     * fetching specified number of hashes
     * $num reperesents the number of hashes to fetch from a list
