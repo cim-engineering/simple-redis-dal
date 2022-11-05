@@ -102,7 +102,7 @@ $count = $db->countkeys($HashName);
 Increase a value in a hash
 ```php 
 $HashName = 'marypoppins@email.com';
-$key = 'age'; // Please note that the value of this key must be an integer
+$key = 'age'; // The value of this key must be an integer
 $increaseBy = 4;
 $db->increase($HashName, $key); // This method increases the value by one
 $db->increaseby($HashName, $key, $increaseBy); // This method increases the value by the specified number 
