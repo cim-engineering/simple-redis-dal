@@ -93,6 +93,11 @@ $HashName = 'marypoppins@email.com';
 $db->gethash($HashName);
 ```
 
+Count the keys in a hash
+```php 
+$HashName = 'marypoppins@email.com';
+$count = $db->countkeys($HashName);
+```
 
 ### Dealing with lists
 Insert value into a list
