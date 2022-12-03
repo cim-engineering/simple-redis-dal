@@ -15,6 +15,12 @@ class hooli{
     protected $redis; 
     private $port;
 
+     /**
+     * Return type: json
+     * @var string
+     */
+    public $returnType = 'array';
+
     /**
      * @param string host           most likely IP of the redis server
      * @param string password       password if any
@@ -62,6 +68,14 @@ class hooli{
     public function set_session($host){
         ini_set('session.save_handler', self::HANDLER);
         ini_set('session.save_path', 'tcp://'.$host.':'.$this->port);  
+    }
+
+    /**
+     * Helper function to create JSON return type
+     */
+    public function json(){
+         $this->returnType = 'json';
+         return $this;
     }
 
     /**
@@ -135,7 +149,7 @@ class hooli{
      * 
      * @return void
      */
-    private function expire($key, $minutes){
+    public function expire($key, $minutes){
         $seconds = $minutes * 60; 
         $this->redis->expire($key, $seconds);
     }
@@ -191,26 +205,18 @@ class hooli{
     }
 
     /**
-     * @param string hashname       Name of the Redis Hash
-     * 
-     * Method converts and returns hash content as JSON
-     * 
-     * @return JSON
-     */
-    public function gethashjson($hashname){
-        header( 'Content-Type: application/json; charset=utf-8' );
-        return json_encode($this->redis->hGetAll($hashname),  TRUE | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-    }
-
-    /**
      * @param string hashname       Name of Redis Hash
-     * 
+     *  returns hash content as JSON when return type is defined
      * Method returns all the contents of a Redis Hash
      * 
      * @return mixed
      */
     public function gethash($hashname){ 
-        return $this->redis->hGetAll($hashname);
+        $result = $this->redis->hGetAll($hashname);
+        if ($this->returnType == 'json') {
+            return json_encode($result, JSON_PRETTY_PRINT);
+        }
+        return $result;
     }
 
     /**
@@ -275,39 +281,21 @@ class hooli{
         $this->redis->del($listname);
     }
 
-    /**
-     * @param string listname       Namw od the redis list
-     * 
-     * Method takes a list and coverts it to JSON
-     * 
-     * @return JSON
-     */
-    public function getlistjson($listname){
-        header( 'Content-Type: application/json; charset=utf-8' );
-       return json_encode($this->redis->lrange($listname, 0, -1),TRUE | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
-    }
+
 
     /**
      * @param string listname       Namw od the redis list
-     * 
-     * Method gets all elements in a list 
-     * 
+     * Method gets all elements in a list  
      * @return mixed
      */
     public function getlist($listname){
-        return $this->redis->lrange($listname, 0, -1);
+        $result =  $this->redis->lrange($listname, 0, -1);
+        if ($this->returnType == 'json') {
+            return json_encode($result, JSON_PRETTY_PRINT);
+        }
+        return $result;
     }
 
-
-     /*
-    * fetching specified number of keys in a list
-    * $num is the set number of keys to be fetched
-    */
-
-    public function getlistjsonNum($listname,$num){
-        header( 'Content-Type: application/json; charset=utf-8' );
-       return json_encode($this->redis->lrange($listname, 0, $num),TRUE | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT );
-    }
 
      /*
     * fetching specified number of keys in a list
@@ -315,7 +303,11 @@ class hooli{
     */
 
     public function getlistnum($listname,$num){
-        return $this->redis->lrange($listname, 0, $num);
+        $result = $this->redis->lrange($listname, 0, $num);
+         if ($this->returnType == 'json') {
+            return json_encode($result, JSON_PRETTY_PRINT);
+        }
+        return $result;
     }
 
 
@@ -392,11 +384,6 @@ class hooli{
         }
         return json_encode($data, TRUE | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
-
- /*
-    * fetching specified number of list
-    * $num reperesents the number of list to fetch
-    */
 
     /*
     * fetching specified number of hashes
