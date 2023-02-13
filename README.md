@@ -168,6 +168,22 @@ $list = "users";
 echo $db->gethashlist($list);
 ```
 
+
+### fetching specified number of keys in a list
+list           Name of the Redis list 
+num is asigned the number of keys to be fetched
+
+```php
+echo $db->getlistnum($list, $num)
+```
+
+### Fetching specified number of hashes
+list           Name of the Redis list 
+num reperesents the number of hashes to fetch from a list
+```php
+echo $db->gethashlistnum($list, $num)
+```
+
 ## Collaborators ✨
 
 <!-- readme: collaborators -start -->
@@ -193,6 +209,7 @@ echo $db->gethashlist($list);
             <br />
             <sub><b>Marshud</b></sub>
         </a>
-    </td></tr>
+    </td>
+    </tr>
 </table>
 <!-- readme: collaborators -end -->
