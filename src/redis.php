@@ -271,6 +271,19 @@ class hooli{
     }
 
     /**
+     * @param string listname       Name of the redis list
+     * @param mixed value           Value to be removed from the list
+     * 
+     * Method removes value from list
+     * 
+     * @return bool                 returns 1 or 0
+     */
+
+     public function removevaluefromlist($listname, $value){
+        return $this->redis->lRem($listname, $value, 0);
+    }
+
+    /**
      * @param string listname       Namw od the redis list
      * 
      * Method deletes a redis list
