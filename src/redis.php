@@ -309,6 +309,34 @@ class hooli{
         return $result;
     }
 
+    /*
+     *Gets custom list range
+    * fetching specified number of keys in a list
+    * $start is the set number of key to start from
+    * $num is the set number of keys to be fetched
+    */
+
+    public function getlistrange($listname,$num){
+        $num = $num * 10;
+        $start = (int)$num - 9;
+        $start = ($num == 10)? 0 : $start;
+        return $this->redis->lrange($listname, $start, $num);
+    }
+
+    /*
+     *Gets custom hash list range
+    * fetching specified number of keys in a list
+    * $num is the number of items returned
+    */
+    public function gethashlistrange($list,$num){
+        $all = $this->getlistrange($list,$num);
+            foreach ($all as $c){ 
+                $data[] = $this->gethash($c); 
+            }
+    
+        return json_encode($data, TRUE | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    }
+
     /**
      * @param string listname       Namw od the redis list
      * @param string value          The value to be found
