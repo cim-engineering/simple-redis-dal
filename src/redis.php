@@ -271,6 +271,19 @@ class hooli{
     }
 
     /**
+     * @param string listname       Name of the redis list
+     * @param mixed value           Value to be removed from the list
+     * 
+     * Method removes value from list
+     * 
+     * @return bool                 returns 1 or 0
+     */
+
+     public function removevaluefromlist($listname, $value){
+        return $this->redis->lRem($listname, $value, 0);
+    }
+
+    /**
      * @param string listname       Namw od the redis list
      * 
      * Method deletes a redis list
@@ -307,6 +320,36 @@ class hooli{
             return json_encode($result, JSON_PRETTY_PRINT);
         }
         return $result;
+    }
+
+    /*
+     *Gets custom list range
+    * fetching specified number of keys in a list
+    * $page is the page requested ie 1,2,3
+    * $num is the set number of keys to be fetched
+    */
+
+    public function getlistrange($listname, $page, $num){
+        $page = (int)$page;  
+        $num = (int)$num; 
+        $end = $page * $num;
+        $start = $end - ($num -1);
+        $start = ($page == 1)? 0 : $start;
+        return $this->redis->lrange($listname, $start, $end);
+    }
+
+    /*
+     *Gets custom hash list range
+    * fetching specified number of keys in a list
+    * $num is the number of items returned
+    */
+    public function gethashlistrange($list, $page, $num){
+        $all = $this->getlistrange($list, $page, $num);
+            foreach ($all as $c){ 
+                $data[] = $this->gethash($c); 
+            }
+    
+        return json_encode($data, TRUE | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
     /**
@@ -404,7 +447,15 @@ class hooli{
         $this->redis->xAdd($streamname, "*", $data); #data is an array
     }
 
-    
+    /*
+    * Add data to hash list using hsetNx
+    * @param string hashlist     Name of the redis hash
+    * @param string field        field
+    * @param array data to be add to list
+    */
+    public function addtohashlistnx($hashlist, $field, $data){
+        return $this->redis->hSetNx($hashlist, $field, serialize($data));
+    }
 
 }
 
