@@ -312,15 +312,17 @@ class hooli{
     /*
      *Gets custom list range
     * fetching specified number of keys in a list
-    * $start is the set number of key to start from
+    * $page is the page requested ie 1,2,3
     * $num is the set number of keys to be fetched
     */
 
-    public function getlistrange($listname,$num){
-        $num = $num * 10;
-        $start = (int)$num - 9;
-        $start = ($num == 10)? 0 : $start;
-        return $this->redis->lrange($listname, $start, $num);
+    public function getlistrange($listname, $page, $num){
+        $page = (int)$page;  
+        $num = (int)$num; 
+        $end = $page * $num;
+        $start = $end - ($num -1);
+        $start = ($page == 1)? 0 : $start;
+        return $this->redis->lrange($listname, $start, $end);
     }
 
     /*
@@ -328,8 +330,8 @@ class hooli{
     * fetching specified number of keys in a list
     * $num is the number of items returned
     */
-    public function gethashlistrange($list,$num){
-        $all = $this->getlistrange($list,$num);
+    public function gethashlistrange($list, $page, $num){
+        $all = $this->getlistrange($list, $page, $num);
             foreach ($all as $c){ 
                 $data[] = $this->gethash($c); 
             }
