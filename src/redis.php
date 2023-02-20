@@ -447,7 +447,15 @@ class hooli{
         $this->redis->xAdd($streamname, "*", $data); #data is an array
     }
 
-    
+    /*
+    * Add data to hash list using hsetNx
+    * @param string hashlist     Name of the redis hash
+    * @param string field        field
+    * @param array data to be add to list
+    */
+    public function addtohashlistnx($hashlist, $field, $data){
+        return $this->redis->hSetNx($hashlist, $field, serialize($data));
+    }
 
 }
 
