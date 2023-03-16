@@ -282,7 +282,6 @@ class hooli{
     }
 
 
-
     /**
      * @param string listname       Namw od the redis list
      * Method gets all elements in a list  
@@ -302,14 +301,13 @@ class hooli{
     * $num is the set number of keys to be fetched
     */
 
-    public function getlistnum($listname,$num){
+    public function getlistnum($listname, $num){
         $result = $this->redis->lrange($listname, 0, $num);
          if ($this->returnType == 'json') {
             return json_encode($result, JSON_PRETTY_PRINT);
         }
         return $result;
     }
-
 
     /**
      * @param string listname       Namw od the redis list
@@ -389,15 +387,14 @@ class hooli{
     * fetching specified number of hashes
     * $num reperesents the number of hashes to fetch from a list
     */
-    public function gethashlistnum($list,$num){
-        $all = $this->getlistnum($list,$num);
+    public function gethashlistnum($list, $num){
+        $all = $this->getlistnum($list, $num);
             foreach ($all as $c){ 
                 $data[] = $this->gethash($c); 
             }
     
         return json_encode($data, TRUE | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
-
 
     /*
     * streams : using redis for queing and messaging
