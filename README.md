@@ -91,6 +91,10 @@ Fetch all values in a single hash
 ```php
 $HashName = 'marypoppins@email.com';
 $db->gethash($HashName);
+
+or using return types
+$db->json()->gethash($HashName);
+
 ```
 
 Count the keys in a hash
@@ -135,10 +139,10 @@ $List = "users";
 $db->deletelist($List);
 ```
 
-Return all values in a List as JSON
+Return all values in a List as JSON return type
 ```php
 $List = "users";
-$db->getlistjson($List);
+$db->json()->getlist($List);
 ```
 Get a specific number of elements from a list
 ```php 
