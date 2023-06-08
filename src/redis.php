@@ -396,6 +396,26 @@ class hooli{
         return json_encode($data, TRUE | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
+        /**
+     * @param string list  and value 
+     * 
+     * Method counts and return a specific value
+     * 
+     * @return JSON
+     */
+
+     public function countahashlistvalue($list, $value){
+        $count = 0;
+        $hl = $this->gethashlist($list);
+        $all = json_decode($hl, true);
+        foreach($all as $item){ 
+            if($item["date_visit"] == $value){
+                $count++ ; 
+            }
+        }
+        return $count;
+    }
+
     /*
     * streams : using redis for queing and messaging
     * add to stream
