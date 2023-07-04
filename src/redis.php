@@ -407,6 +407,42 @@ class hooli {
         return json_encode($data, TRUE | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
     }
 
+        /**
+     * @param string list  and value 
+     * 
+     * Method counts the occcurances of a param value and return a sum of value
+     * 
+     * @return JSON
+     */
+     public function counthashlistbyvalue($list, $value){
+        $count = 0;
+        $hl = $this->gethashlist($list);
+        $all = json_decode($hl, true);
+        foreach($all as $item){ 
+            if($item["date_visit"] == $value){
+                $count++ ; 
+            }
+        }
+        return $count;
+    }
+       /**
+     * @param string list name  and field name
+     * 
+     * Method counts a hashlist by field and returns a sums each key as a string.
+     * 
+     * @return JSON
+     */
+
+     public function counthashlistbyfield($list, $field){
+        $hl = $this->gethashlist($list);
+        $all = json_decode($hl, true);
+        foreach ($all as $row){
+            $item[] = $row[$field];
+            }
+        $items = array_count_values($item);
+        return $items;
+    }
+
     /*
      * streams : using redis for queing and messaging
      * add to stream
