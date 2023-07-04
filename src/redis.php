@@ -414,6 +414,23 @@ class hooli{
         }
         return $count;
     }
+       /**
+     * @param string list name  and field name
+     * 
+     * Method counts a hashlist by field and returns a sums each key as a string.
+     * 
+     * @return JSON
+     */
+
+     public function counthashlistbyfield($list, $field){
+        $hl = $this->gethashlist($list);
+        $all = json_decode($hl, true);
+        foreach ($all as $row){
+            $item[] = $row[$field];
+            }
+        $items = array_count_values($item);
+        return $items;
+    }
 
     /*
     * streams : using redis for queing and messaging
