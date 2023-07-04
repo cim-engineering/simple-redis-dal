@@ -399,11 +399,11 @@ class hooli{
         /**
      * @param string list  and value 
      * 
-     * Method counts and return a specific value
+     * Method counts the occcurances of a param value and return a sum of value
      * 
      * @return JSON
      */
-     public function countahashlistvalue($list, $value){
+     public function counthashlistbyvalue($list, $value){
         $count = 0;
         $hl = $this->gethashlist($list);
         $all = json_decode($hl, true);
